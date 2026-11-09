@@ -8,7 +8,7 @@ const {
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const SITE_URL = process.env.SITE_URL || 'https://netzhdkino.up.railway.app';
+const SITE_URL = process.env.SITE_URL || 'https://netz-hd-kino.vercel.app';
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));

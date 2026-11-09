@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const { tmdb, img, slugify } = require('./lib/tmdb');
 const { 
   head, layout, posterCard, genreRow, trailerBlock, castGrid, 
@@ -10,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 const SITE_URL = process.env.SITE_URL || 'https://netz-hd-kino.vercel.app';
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
 // ---------- PROTEKSI BOT SEDERHANA ----------

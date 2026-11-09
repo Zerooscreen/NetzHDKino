@@ -7,7 +7,7 @@ const {
 } = require('./lib/render');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const SITE_URL = process.env.SITE_URL || 'https://netz-hd-kino.vercel.app';
 
 app.use(express.static('public'));

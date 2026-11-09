@@ -1,16 +1,16 @@
 const express = require('express');
+const path = require('path');
 const { tmdb, img, slugify } = require('./lib/tmdb');
 const { 
   head, layout, posterCard, genreRow, trailerBlock, castGrid, 
-  escapeHtml, movieJsonLd, tvJsonLd, sideBannerAd, nativeBannerAd, 
-  DEFAULT_TITLE, DEFAULT_DESC, SITE_NAME 
+  escapeHtml, DEFAULT_TITLE, DEFAULT_DESC 
 } = require('./lib/render');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 const SITE_URL = process.env.SITE_URL || 'https://netz-hd-kino.vercel.app';
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 
 // ---------- PROTEKSI BOT SEDERHANA ----------
@@ -469,7 +469,7 @@ app.get('/tv', async (req, res) => {
   const data = await tmdb('/tv/popular');
   const bodyHtml = `
     <h1 style="font-size:28px; margin:24px 0;">Beliebte Serien</h1>
-    <div class="grid">${(data.results || []).map(item => posterCard(item, 'tv')).join('')}</div>
+    <div class="grid">${(data.results || []).slice(0, 12).map(item => posterCard(item, 'tv')).join('')}</div>
   `;
   res.send(layout({ headHtml: head({ title: 'Serien · NetzHdKino', description: DEFAULT_DESC, url: `${SITE_URL}/tv` }), bodyHtml, activeTab: 'tv' }));
 });
